@@ -1,0 +1,18 @@
+exec = (require 'child_process').exec
+
+bkfiles=[
+  'coffee/notify.coffee',
+  'coffee/JSErrorNotify.coffee'
+]
+
+files=[
+  'coffee/contents.coffee'
+]
+
+exec "coffee -j js/JSErrorNotify.js -wc #{bkfiles.join ' '}",(err,stdout,stderr)->
+  throw err if err
+  console.log stdout+stderr
+  
+exec "coffee -j js/contents.js -wc #{files.join ' '}",(err,stdout,stderr)->
+  throw err if err
+  console.log stdout+stderr

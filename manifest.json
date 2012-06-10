@@ -1,0 +1,21 @@
+{
+	"name": "JSErrorNotify",
+	"version": "1.0",
+	"description": "JavaScript Error Notify",
+	"icons": {
+		"32": "img/icon32.png",
+		"48": "img/icon48.png",
+		"128": "img/icon128.png"
+	},
+	"background": {
+ 		"scripts": ["js/JSErrorNotify.js"]
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*/*","https://*/*"],
+			"js": ["js/contents.js"],
+			"run_at":"document_start"
+		}
+	],
+	"permissions": ["notifications"]
+}
