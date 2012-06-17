@@ -1,15 +1,12 @@
-class JSErrorNotify
-
+class BackGround
+  
   constructor:(option)->
     @notify = null
-    @option = 
-      delay:500
+    @model = null
+    @option = {}
     @_extends option
     @_init()
     
-  JSErrorNotify.IMG_ICON = "../img/icon32.png"
-  JSErrorNotify.LINE = ' line:'
-  
   # オプションを継承
   _extends:(option)->
     if option is undefined
@@ -19,14 +16,17 @@ class JSErrorNotify
     @
     
   _init:->
-    @notify = new Notify timeout:10000
-    @_setEvent();
+    @model = new LsModel JSEN.model
+    @notify = new Notify()
+    @_setEvent()
     @
     
   _setEvent:->
     chrome.extension.onRequest.addListener (request, sender, sendResponse)=>
-      @notify.show JSErrorNotify.IMG_ICON, request.filename, request.message + JSErrorNotify.LINE + request.lineno, @option.delay
+      data = @model.getData()
+      @notify.option.timeout = data.timeout
+      @notify.show JSEN.IMG_ICON, request.filename, request.message + JSEN.LINE + request.lineno, data.delay
       @
     @
     
-new JSErrorNotify()
+new BackGround()
