@@ -2,9 +2,9 @@ class Notify
 
   constructor: (option)->
     @option =
-       ondisplay:->
-       onclose:->
-       timeout:5000
+      ondisplay:->
+      onclose:->
+      timeout:5000
     @_extends option
     @_init()
   
